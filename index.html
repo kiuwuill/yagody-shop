@@ -2,15 +2,121 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Ягодная лавка</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ягодная Лавка | Свежие ягоды и десерты</title>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
-    body { font-family: sans-serif; background: #fff5f5; text-align: center; padding: 50px; }
-    h1 { color: #c0392b; }
-    .berry { font-size: 80px; }
+    :root {
+      --primary: #E63946; /* Малиновый */
+      --dark: #2B2B52;    /* Черничный */
+      --bg: #FDFBF7;      /* Кремовый */
+      --accent: #A8E6CF;  /* Мятный */
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Manrope', sans-serif; background-color: var(--bg); color: var(--dark); line-height: 1.6; }
+    
+    /* Шапка */
+    header { background: white; padding: 20px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: sticky; top: 0; z-index: 100; }
+    .logo { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--primary); font-weight: 700; }
+    .nav-links a { text-decoration: none; color: var(--dark); margin-left: 20px; font-weight: 600; transition: 0.3s; }
+    .nav-links a:hover { color: var(--primary); }
+    .cart-btn { background: var(--primary); color: white; padding: 10px 20px; border-radius: 50px; text-decoration: none; font-weight: 600; }
+
+    /* Главный баннер */
+    .hero { text-align: center; padding: 80px 20px; background: linear-gradient(135deg, #fff5f5 0%, #fdfbf7 100%); }
+    .hero h1 { font-family: 'Playfair Display', serif; font-size: 3.5rem; margin-bottom: 20px; color: var(--dark); }
+    .hero p { font-size: 1.2rem; color: #666; max-width: 600px; margin: 0 auto 30px; }
+    .cta-btn { display: inline-block; background: var(--primary); color: white; padding: 15px 40px; border-radius: 50px; text-decoration: none; font-size: 1.1rem; font-weight: 700; box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3); transition: transform 0.2s; }
+    .cta-btn:hover { transform: translateY(-3px); }
+
+    /* Каталог */
+    .catalog { padding: 60px 5%; max-width: 1200px; margin: 0 auto; }
+    .section-title { text-align: center; font-family: 'Playfair Display', serif; font-size: 2.5rem; margin-bottom: 40px; }
+    .products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+    
+    .product-card { background: white; border-radius: 20px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: 0.3s; }
+    .product-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+    .product-img { width: 100%; height: 220px; object-fit: cover; }
+    .product-info { padding: 20px; }
+    .product-name { font-size: 1.3rem; font-weight: 700; margin-bottom: 10px; }
+    .product-desc { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
+    .product-footer { display: flex; justify-content: space-between; align-items: center; }
+    .price { font-size: 1.4rem; font-weight: 800; color: var(--primary); }
+    .add-btn { background: var(--dark); color: white; border: none; padding: 10px 20px; border-radius: 10px; cursor: pointer; font-weight: 600; transition: 0.2s; }
+    .add-btn:hover { background: var(--primary); }
+
+    /* Футер */
+    footer { background: var(--dark); color: white; text-align: center; padding: 40px 20px; margin-top: 60px; }
+    footer p { opacity: 0.7; }
   </style>
 </head>
 <body>
-  <div class="berry">🍓🫐🍒</div>
-  <h1>Добро пожаловать в Ягодную лавку!</h1>
-  <p>Самые свежие ягоды и вкусные изделия из них.</p>
-  <p><em>Сайт в разработке — скоро здесь будет магия ✨</em></p>
+
+  <header>
+    <div class="logo">🍓 Ягодная Лавка</div>
+    <nav class="nav-links">
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О нас</a>
+      <a href="#" class="cart-btn">Корзина (0)</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>Вкус природы<br>в каждой ягоде</h1>
+    <p>Свежая клубника, голубика и малина, собранные сегодня утром. А также авторские джемы и десерты.</p>
+    <a href="#catalog" class="cta-btn">Выбрать ягоды</a>
+  </section>
+
+  <section id="catalog" class="catalog">
+    <h2 class="section-title">Свежий урожай</h2>
+    <div class="products-grid">
+      
+      <!-- Товар 1 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1518635017498-87f514b751ba?auto=format&fit=crop&w=400&q=80" alt="Клубника" class="product-img">
+        <div class="product-info">
+          <div class="product-name">Клубника садовая</div>
+          <div class="product-desc">Сладкая, ароматная, идеальна для десертов или просто так. 500 г.</div>
+          <div class="product-footer">
+            <span class="price">450 ₽</span>
+            <button class="add-btn" onclick="alert('Добавлено в корзину! (Пока по-настоящему не работает, но скоро будет!)')">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товар 2 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1498557850523-fd3d118b962e?auto=format&fit=crop&w=400&q=80" alt="Голубика" class="product-img">
+        <div class="product-info">
+          <div class="product-name">Голубика крупная</div>
+          <div class="product-desc">Полезная и вкусная. Отлично подходит для смузи и завтраков. 300 г.</div>
+          <div class="product-footer">
+            <span class="price">390 ₽</span>
+            <button class="add-btn" onclick="alert('Добавлено в корзину!')">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товар 3 -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1577069861033-55d04cec4ef5?auto=format&fit=crop&w=400&q=80" alt="Малина" class="product-img">
+        <div class="product-info">
+          <div class="product-name">Малина отборная</div>
+          <div class="product-desc">Нежная, тает во рту. Собрана вручную. 400 г.</div>
+          <div class="product-footer">
+            <span class="price">550 ₽</span>
+            <button class="add-btn" onclick="alert('Добавлено в корзину!')">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Ягодная Лавка. Сделано с любовью к природе.</p>
+    <p>Доставка по городу в день заказа 🚚</p>
+  </footer>
+
+</body>
+</html>

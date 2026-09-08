@@ -3,6 +3,518 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Дикарь — Натуральные продукты без ГМО и консервантов</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --green-dark: #2D5016;      /* Лесной зелёный */
+      --green-main: #3A6B1F;      /* Основной зелёный */
+      --green-light: #5A8F3C;     /* Светлый зелёный */
+      --craft: #D4C5A0;           /* Крафтовый бежевый */
+      --craft-light: #F5F1E8;     /* Светлый крафт */
+      --brown: #2C2416;           /* Тёмно-коричневый */
+      --accent: #8B6914;          /* Золотисто-коричневый */
+    }
+    
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body { 
+      font-family: 'Manrope', sans-serif; 
+      background-color: var(--craft-light); 
+      color: var(--brown); 
+      line-height: 1.6; 
+    }
+    
+    /* Шапка */
+    header { 
+      background: var(--craft-light); 
+      padding: 15px 5%; 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+      border-bottom: 2px solid var(--green-dark);
+      position: sticky; 
+      top: 0; 
+      z-index: 100; 
+    }
+    
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .logo-svg {
+      width: 50px;
+      height: 50px;
+    }
+    
+    .logo-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      color: var(--green-dark);
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+    
+    .nav-links a { 
+      text-decoration: none; 
+      color: var(--brown); 
+      margin-left: 25px; 
+      font-weight: 600; 
+      transition: 0.3s; 
+    }
+    .nav-links a:hover { color: var(--green-main); }
+    
+    .cart-btn { 
+      background: var(--green-dark); 
+      color: white; 
+      padding: 10px 20px; 
+      border-radius: 4px; 
+      text-decoration: none; 
+      font-weight: 600; 
+      transition: 0.3s;
+    }
+    .cart-btn:hover { background: var(--green-main); }
+
+    /* Главный баннер */
+    .hero { 
+      text-align: center; 
+      padding: 100px 20px; 
+      background: linear-gradient(135deg, var(--craft-light) 0%, #E8E0CC 100%);
+      border-bottom: 3px solid var(--green-dark);
+    }
+    
+    .hero h1 { 
+      font-family: 'Playfair Display', serif; 
+      font-size: 4rem; 
+      margin-bottom: 20px; 
+      color: var(--green-dark);
+      font-weight: 900;
+    }
+    
+    .hero .subtitle {
+      font-size: 1.3rem;
+      color: var(--brown);
+      max-width: 700px;
+      margin: 0 auto 15px;
+      font-weight: 600;
+    }
+    
+    .hero .description {
+      font-size: 1.1rem;
+      color: #5A4A3A;
+      max-width: 650px;
+      margin: 0 auto 35px;
+    }
+    
+    .cta-btn { 
+      display: inline-block; 
+      background: var(--green-dark); 
+      color: white; 
+      padding: 18px 45px; 
+      border-radius: 4px; 
+      text-decoration: none; 
+      font-size: 1.1rem; 
+      font-weight: 700; 
+      transition: all 0.3s;
+      border: 2px solid var(--green-dark);
+    }
+    .cta-btn:hover { 
+      background: transparent;
+      color: var(--green-dark);
+    }
+
+    /* Категории */
+    .categories {
+      padding: 60px 5%;
+      background: white;
+    }
+    
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 25px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .category-card {
+      text-align: center;
+      padding: 30px 20px;
+      background: var(--craft-light);
+      border: 2px solid var(--craft);
+      border-radius: 4px;
+      transition: 0.3s;
+    }
+    
+    .category-card:hover {
+      border-color: var(--green-dark);
+      transform: translateY(-3px);
+    }
+    
+    .category-icon {
+      font-size: 3rem;
+      margin-bottom: 10px;
+    }
+    
+    .category-name {
+      font-weight: 700;
+      color: var(--green-dark);
+      font-size: 1.1rem;
+    }
+
+    /* Каталог */
+    .catalog { 
+      padding: 80px 5%; 
+      max-width: 1200px; 
+      margin: 0 auto; 
+    }
+    
+    .section-title { 
+      text-align: center; 
+      font-family: 'Playfair Display', serif; 
+      font-size: 3rem; 
+      margin-bottom: 15px;
+      color: var(--green-dark);
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: var(--brown);
+      margin-bottom: 50px;
+      font-size: 1.1rem;
+    }
+    
+    .products-grid { 
+      display: grid; 
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+      gap: 30px; 
+    }
+    
+    .product-card { 
+      background: white; 
+      border-radius: 4px; 
+      overflow: hidden; 
+      border: 2px solid var(--craft);
+      transition: 0.3s; 
+    }
+    .product-card:hover { 
+      border-color: var(--green-dark);
+      transform: translateY(-5px); 
+      box-shadow: 0 10px 25px rgba(45, 80, 22, 0.15); 
+    }
+    
+    .product-img { 
+      width: 100%; 
+      height: 220px; 
+      object-fit: cover; 
+    }
+    
+    .product-info { padding: 20px; }
+    
+    .product-category {
+      font-size: 0.85rem;
+      color: var(--green-main);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+    
+    .product-name { 
+      font-size: 1.3rem; 
+      font-weight: 700; 
+      margin-bottom: 10px;
+      color: var(--brown);
+    }
+    
+    .product-desc { 
+      font-size: 0.9rem; 
+      color: #6B5D4F; 
+      margin-bottom: 15px; 
+    }
+    
+    .product-footer { 
+      display: flex; 
+      justify-content: space-between; 
+      align-items: center; 
+    }
+    
+    .price { 
+      font-size: 1.4rem; 
+      font-weight: 800; 
+      color: var(--green-dark); 
+    }
+    
+    .add-btn { 
+      background: var(--green-dark); 
+      color: white; 
+      border: none; 
+      padding: 10px 20px; 
+      border-radius: 4px; 
+      cursor: pointer; 
+      font-weight: 600; 
+      transition: 0.2s; 
+    }
+    .add-btn:hover { background: var(--green-main); }
+
+    /* О нас */
+    .about {
+      background: var(--green-dark);
+      color: white;
+      padding: 80px 5%;
+      text-align: center;
+    }
+    
+    .about h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 30px;
+    }
+    
+    .about p {
+      max-width: 700px;
+      margin: 0 auto 20px;
+      font-size: 1.1rem;
+      line-height: 1.8;
+    }
+    
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+      max-width: 1000px;
+      margin: 50px auto 0;
+    }
+    
+    .feature {
+      padding: 20px;
+    }
+    
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 15px;
+    }
+    
+    .feature-title {
+      font-weight: 700;
+      font-size: 1.2rem;
+      margin-bottom: 10px;
+    }
+
+    /* Футер */
+    footer { 
+      background: var(--brown); 
+      color: var(--craft); 
+      text-align: center; 
+      padding: 40px 20px; 
+    }
+    footer p { 
+      opacity: 0.8; 
+      margin-bottom: 10px;
+    }
+    
+    .footer-contacts {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <!-- SVG Логотип: нож и топор в квадратной рамке -->
+      <svg class="logo-svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <!-- Квадратная рамка -->
+        <rect x="10" y="10" width="80" height="80" fill="none" stroke="#2D5016" stroke-width="4"/>
+        
+        <!-- Нож (диагональ слева направо) -->
+        <line x1="25" y1="75" x2="75" y2="25" stroke="#2D5016" stroke-width="5" stroke-linecap="round"/>
+        <!-- Лезвие ножа -->
+        <polygon points="70,20 80,20 75,30" fill="#2D5016"/>
+        
+        <!-- Топор (диагональ справа налево) -->
+        <line x1="75" y1="75" x2="25" y2="25" stroke="#2D5016" stroke-width="5" stroke-linecap="round"/>
+        <!-- Лезвие топора -->
+        <polygon points="20,20 30,20 25,30" fill="#2D5016"/>
+      </svg>
+      <div class="logo-text">Дикарь</div>
+    </div>
+    <nav class="nav-links">
+      <a href="#categories">Категории</a>
+      <a href="#catalog">Каталог</a>
+      <a href="#about">О нас</a>
+      <a href="#" class="cart-btn">Корзина (0)</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>ДИКАРЬ</h1>
+    <p class="subtitle">Интернет-магазин натурального питания</p>
+    <p class="description">Продукты без искусственных добавок, красителей и консервантов.直接从 природы к вашему столу.</p>
+    <a href="#catalog" class="cta-btn">Смотреть каталог</a>
+  </section>
+
+  <section id="categories" class="categories">
+    <div class="categories-grid">
+      <div class="category-card">
+        <div class="category-icon"></div>
+        <div class="category-name">Ягоды</div>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">🍵</div>
+        <div class="category-name">Авторские чаи</div>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">🌻</div>
+        <div class="category-name">Масла холодного отжима</div>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">🍎</div>
+        <div class="category-name">Пастила и сушка</div>
+      </div>
+      <div class="category-card">
+        <div class="category-icon">🍯</div>
+        <div class="category-name">Мёд и варенье</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="catalog" class="catalog">
+    <h2 class="section-title">Каталог</h2>
+    <p class="section-subtitle">Только натуральное. Только настоящее.</p>
+    
+    <div class="products-grid">
+      
+      <!-- Товар 1: Ягоды -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1498557850523-fd3d118b962e?auto=format&fit=crop&w=400&q=80" alt="Голубика" class="product-img">
+        <div class="product-info">
+          <div class="product-category">Ягоды</div>
+          <div class="product-name">Голубика лесная</div>
+          <div class="product-desc">Собрана вручную в экологически чистых лесах. 300 г.</div>
+          <div class="product-footer">
+            <span class="price">450 ₽</span>
+            <button class="add-btn">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товар 2: Чай -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?auto=format&fit=crop&w=400&q=80" alt="Чай" class="product-img">
+        <div class="product-info">
+          <div class="product-category">Авторские чаи</div>
+          <div class="product-name">Иван-чай с облепихой</div>
+          <div class="product-desc">Ферментированный иван-чай с добавлением сушёной облепихи. 100 г.</div>
+          <div class="product-footer">
+            <span class="price">320 ₽</span>
+            <button class="add-btn">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товар 3: Масло -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1474979266404-7eaacbcd87c5?auto=format&fit=crop&w=400&q=80" alt="Масло" class="product-img">
+        <div class="product-info">
+          <div class="product-category">Масла</div>
+          <div class="product-name">Льняное масло холодного отжима</div>
+          <div class="product-desc">Нерафинированное, первого холодного отжима. 250 мл.</div>
+          <div class="product-footer">
+            <span class="price">280 ₽</span>
+            <button class="add-btn">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товар 4: Пастила -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1601493700631-2b16ec4b4716?auto=format&fit=crop&w=400&q=80" alt="Пастила" class="product-img">
+        <div class="product-info">
+          <div class="product-category">Пастила</div>
+          <div class="product-name">Яблочная пастила</div>
+          <div class="product-desc">Без сахара и добавок. Только яблоки. 150 г.</div>
+          <div class="product-footer">
+            <span class="price">220 ₽</span>
+            <button class="add-btn">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товар 5: Малина -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1577069861033-55d04cec4ef5?auto=format&fit=crop&w=400&q=80" alt="Малина" class="product-img">
+        <div class="product-info">
+          <div class="product-category">Ягоды</div>
+          <div class="product-name">Малина садовая</div>
+          <div class="product-desc">Ароматная, сладкая, собрана утром. 400 г.</div>
+          <div class="product-footer">
+            <span class="price">380 ₽</span>
+            <button class="add-btn">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Товар 6: Чай -->
+      <div class="product-card">
+        <img src="https://images.unsplash.com/photo-1597318181409-cf64d0b5d8a2?auto=format&fit=crop&w=400&q=80" alt="Чай" class="product-img">
+        <div class="product-info">
+          <div class="product-category">Авторские чаи</div>
+          <div class="product-name">Чай с мятой и чабрецом</div>
+          <div class="product-desc">Собран в горах. Успокаивает и бодрит одновременно. 80 г.</div>
+          <div class="product-footer">
+            <span class="price">290 ₽</span>
+            <button class="add-btn">В корзину</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section id="about" class="about">
+    <h2>Почему Дикарь?</h2>
+    <p>Мы верим, что еда должна быть настоящей. Без ГМО, без искусственных красителей, без консервантов. Только то, что дала природа.</p>
+    <p>Каждый продукт проходит ручной отбор. Мы работаем напрямую с фермерами и заготовителями.</p>
+    
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🌿</div>
+        <div class="feature-title">100% натуральное</div>
+        <p>Без химии и добавок</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🤝</div>
+        <div class="feature-title">Прямые поставки</div>
+        <p>От фермера к вам</p>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">✅</div>
+        <div class="feature-title">Ручной отбор</div>
+        <p>Контроль качества</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 Дикарь — Интернет-магазин натурального питания</p>
+    <p>Натуральные продукты без искусственных добавок, красителей и консервантов</p>
+    <div class="footer-contacts">
+      <p>📞 8 (981) 860-70-90</p>
+      <p>🌐 www.дикарь-спб.рф</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ягодная Лавка | Свежие ягоды и десерты</title>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   <style>
